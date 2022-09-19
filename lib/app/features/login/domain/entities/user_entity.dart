@@ -1,6 +1,8 @@
+import '../../data/data.dart';
+
 class UserEntity {
   final String token;
-  final String refreshToken;
+  final String refresh;
   final String expireIn;
   final int id;
   final String avatarUrl;
@@ -23,7 +25,7 @@ class UserEntity {
 
   UserEntity({
     required this.token, 
-    required this.refreshToken, 
+    required this.refresh, 
     required this.expireIn, 
     required this.id, 
     required this.avatarUrl, 
@@ -60,6 +62,14 @@ class EmailEntity {
     required this.verified, 
     required this.primary
   });
+
+  factory EmailEntity.fromModel(EmailModel emailModel) => EmailEntity(
+      id: emailModel.id,
+      userId: emailModel.userId,
+      email: emailModel.email,
+      verified: emailModel.verified,
+      primary: emailModel.primary,
+    );
 }
 
 class PhoneEntity {
@@ -78,6 +88,15 @@ class PhoneEntity {
     required this.createdAt, 
     required this.updatedAt
   });
+
+  factory PhoneEntity.fromModel(PhoneModel phoneModel) => PhoneEntity(
+      id: phoneModel.id,
+      userId: phoneModel.userId,
+      phone: phoneModel.phone,
+      phoneType: phoneModel.phoneType,
+      createdAt: phoneModel.createdAt,
+      updatedAt: phoneModel.updatedAt,
+    );
 }
 
 class AddressEntity {
@@ -106,4 +125,18 @@ class AddressEntity {
     required this.createdAt, 
     required this.updatedAt
   });
+
+  factory AddressEntity.fromModel(AddressModel addressModel) => AddressEntity(
+      id: addressModel.id,
+      userId: addressModel.userId,
+      postalCode: addressModel.postalCode,
+      address1: addressModel.address1,
+      address2: addressModel.address2,
+      number: addressModel.number,
+      neighborhood: addressModel.neighborhood,
+      locality: addressModel.locality,
+      state: addressModel.state,
+      createdAt: addressModel.createdAt,
+      updatedAt: addressModel.updatedAt,
+    );
 }

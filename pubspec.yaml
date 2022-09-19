@@ -16,7 +16,9 @@ dependencies:
 
   # dependencies injection
   get_it: ^7.2.0
-  injectable: ^1.5.3
+
+  # http
+  dio: ^4.0.6
   
   # others
   dartz: ^0.10.1
@@ -26,7 +28,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^2.2.0
-  injectable_generator: ^1.5.4
+  mocktail: ^0.3.0
   
 
   # The "flutter_lints" package below contains a set of recommended lints to
