@@ -15,6 +15,7 @@ class LoginRepositoryImp implements LoginRepository  {
       final response = await _dataSource.login(loginModel);
       return right(response);
     } catch (e) {
+      //TODO: implement treatments for different types of errors
       return left(ServerException(message: 'Erro na comunicação com o servidor'));
     }
   }
