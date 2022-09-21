@@ -3,9 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../core/core.dart';
-import '../data/data.dart';
-import '../domain/domain.dart';
+import '../../../../core/core.dart';
+import '../../../features.dart';
 
 part 'login_controller.g.dart';
 
@@ -46,11 +45,11 @@ abstract class LoginControllerBase with Store, Validator {
   }
 
   void _goToUserScreen(BuildContext context, UserEntity userEntity) {
-    Navigator.pushNamed(
-      context, 
-      '/user_screen', 
-      arguments: userEntity,
-    );
+    // Navigator.pushNamed(
+    //   context, 
+    //   '/user_screen', 
+    //   arguments: userEntity,
+    // );
   }
 
   void _showSnackbar(BuildContext context, String message, [bool isError = false]) {
