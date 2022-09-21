@@ -4,11 +4,11 @@ import '../../../../core/core.dart';
 import '../../data/data.dart';
 import '../domain.dart';
 
-class LoginUser {
+class LoginUseCase {
   final LoginRepository _repository;
 
-  LoginUser({required LoginRepository repository}) : _repository = repository;
+  LoginUseCase({required LoginRepository repository}) : _repository = repository;
 
-  Future<Either<ExceptionApp, UserEntity>> loginUserMethod(LoginModel loginModel) async =>
+  Future<Either<ExceptionApp, UserEntity>> login(LoginModel loginModel) async =>
       _repository.login(loginModel);
 }
