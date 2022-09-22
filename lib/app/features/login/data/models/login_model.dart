@@ -13,7 +13,7 @@ class LoginModel {
     );
 
   Map<String, dynamic> toJson() => {
-      'user': user,
+      'username': user,
       'password': password
     };
 }

@@ -15,7 +15,7 @@ class EmailModel {
 
   factory EmailModel.fromJson(Map<String, dynamic> json) => EmailModel(
       id: json['id'],
-      userId: json['user_id'],
+      userId: json['userId'],
       email: json['email'],
       verified: json['verified'],
       primary: json['primary'],

@@ -17,10 +17,10 @@ class PhoneModel {
 
   factory PhoneModel.fromJson(Map<String, dynamic> json) => PhoneModel(
       id: json['id'],
-      userId: json['user_id'],
-      phoneType: json['phone_type'],
+      userId: json['userId'],
+      phoneType: json['phoneType'],
       phone: json['phone'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
 }

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../../core/core.dart';
+import '../interface_adapters/controllers/controllers.dart';
 import 'widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final _controller = GetIt.I.get<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -73,30 +79,40 @@ class LoginScreen extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const TextFieldWidget(
-                            label: 'Usuário',
-                          ),
-                          const SizedBox(height: 18),
-                          const TextFieldWidget(
-                            label: 'Senha',
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: TextButton(
-                              onPressed: () {}, 
-                              child: const Text('Esqueci minha senha')
+                      child: Form(
+                        key: _controller.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFieldWidget(
+                              label: 'Usuário',
+                              onChanged: _controller.setUser,
+                              validator: Validator.validateUser,
                             ),
-                          ),
-                          ButtonWidget(
-                            label: 'ENTRAR',
-                            enable: true,
-                            backgroundColor: Theme.of(context).colorScheme.primary,
-                            onPressed: () {},
-                          )
-                        ],
+                            const SizedBox(height: 18),
+                            TextFieldWidget(
+                              label: 'Senha',
+                              onChanged: _controller.setPassword,
+                              validator: Validator.validatePassword,
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: TextButton(
+                                onPressed: () {}, 
+                                child: const Text('Esqueci minha senha')
+                              ),
+                            ),
+                            Observer(
+                              builder: (context) => ButtonWidget(
+                                  label: 'ENTRAR',
+                                  isLoading: _controller.isLoading,
+                                  enable: _controller.isValidForm,
+                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                  onPressed: () => _controller.login(context),
+                                )
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

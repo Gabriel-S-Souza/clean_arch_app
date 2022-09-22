@@ -3,7 +3,7 @@ class AddressModel {
   final int userId;
   final String postalCode;
   final String address1;
-  final int number;
+  final String number;
   final String? address2;
   final String neighborhood;
   final String locality;
@@ -27,15 +27,15 @@ class AddressModel {
 
   factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
       id: json['id'],
-      userId: json['user_id'],
-      postalCode: json['postal_code'],
-      address1: json['address_1'],
-      address2: json['address_2'],
+      userId: json['userId'],
+      postalCode: json['postalCode'],
+      address1: json['address1'],
+      address2: json['address2'],
       number: json['number'],
       neighborhood: json['neighborhood'],
       locality: json['locality'],
       state: json['state'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
 }

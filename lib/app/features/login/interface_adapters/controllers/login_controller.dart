@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,9 +14,11 @@ part 'login_controller.g.dart';
 class LoginController = LoginControllerBase 
     with _$LoginController;
 
-abstract class LoginControllerBase with Store, Validator {
+abstract class LoginControllerBase with Store {
   final LoginUseCase _loginUseCase;
   LoginControllerBase({required LoginUseCase loginUseCase}) : _loginUseCase = loginUseCase;
+
+  final formKey = GlobalKey<FormState>();
 
   @observable
   String user = '';
@@ -32,19 +37,38 @@ abstract class LoginControllerBase with Store, Validator {
 
   @action
   void togglePassword() => showPassword = !showPassword;
+  
+  @observable
+  bool isLoading = false;
+
+  @computed
+  bool get isValidForm => Validator.validateUser(user) == null
+      && Validator.validatePassword(password) == null;
 
   Future<void> login(BuildContext context) async {
-    final loginModel = LoginModel(user: user, password: password);
-    final response = await _loginUseCase.login(loginModel);
+    if (formKey.currentState!.validate()) {
+      isLoading = true;
 
-    if (response is UserEntity) {
-      _goToUserScreen(context, response as UserEntity);
-    } else {
-      _showSnackbar(context, (response as ExceptionApp).message!);
+      final loginModel = LoginModel(user: user, password: password);
+      final response = await _loginUseCase.login(loginModel);
+
+      response.fold(
+        (exception) => _showSnackbar(context, exception.message ?? 'Houve um erro'), 
+        (userResponse) => _goToUserScreen(context, userResponse)
+      );
+
+      isLoading = false;
     }
   }
 
   void _goToUserScreen(BuildContext context, UserEntity userEntity) {
+    log('navigate to user screen');
+    log('User');
+    log(userEntity.name);
+    log(userEntity.emails.first.email);
+    log(userEntity.phones.first.phone);
+    log(userEntity.addresses.first.address1);
+    log(userEntity.avatarUrl);
     // Navigator.pushNamed(
     //   context, 
     //   '/user_screen', 

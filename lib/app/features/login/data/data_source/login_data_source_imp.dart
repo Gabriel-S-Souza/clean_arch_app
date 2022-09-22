@@ -1,7 +1,6 @@
 import '../../../../core/core.dart';
 import '../../domain/entities/entities.dart';
 import '../data.dart';
-import 'http/http.dart';
 
 class LoginDataSourceImp implements LoginDataSource {
   final HttpClient httpClient;
@@ -13,9 +12,10 @@ class LoginDataSourceImp implements LoginDataSource {
   Future<UserEntity> login(LoginModel loginData) async {
     try {
       final ResponseModel response = await httpClient.post(apiEndpointLogin, body: loginData.toJson());
-      final responseEntity = UserModel.fromJson(response.body!['user']).toEntity();
+      final responseEntity = UserModel.fromJson(response.body!).toEntity();
       return responseEntity;
-    } catch (e) {
+    } 
+    catch (e) {
       rethrow;
     }
   }

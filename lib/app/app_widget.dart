@@ -32,9 +32,8 @@ class AppWidget extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.blueGrey[50],
       ),
-      home: const LoginScreen(),
       routes: <String, WidgetBuilder>{
-        '/login': (BuildContext context) => const LoginScreen(),
+        '/login': (BuildContext context) => LoginScreen(),
       },
       initialRoute: '/login',
     );

@@ -1,7 +1,7 @@
 import '../../data/data.dart';
 
 class UserEntity {
-  final String token;
+  final String access;
   final String refresh;
   final String expireIn;
   final int id;
@@ -24,7 +24,7 @@ class UserEntity {
   final List<AddressEntity> addresses;
 
   UserEntity({
-    required this.token, 
+    required this.access, 
     required this.refresh, 
     required this.expireIn, 
     required this.id, 
@@ -104,7 +104,7 @@ class AddressEntity {
   final int userId;
   final String postalCode;
   final String address1;
-  final int number;
+  final String number;
   final String? address2;
   final String neighborhood;
   final String locality;
