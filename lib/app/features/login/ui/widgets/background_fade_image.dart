@@ -15,7 +15,10 @@ class BackgroundFadeImage extends StatefulWidget {
 
 class _BackgroundFadeImageState extends State<BackgroundFadeImage> {
 
-  final List<String> images = [];
+  late final Timer timer;
+
+  List<String> images = [];
+  List<String> images2 = [];
 
   bool showFistImage = true;
 
@@ -31,19 +34,30 @@ class _BackgroundFadeImageState extends State<BackgroundFadeImage> {
 
     images.add(imagesSource.removeAt(Random().nextInt(imagesSource.length)));
     images.add(imagesSource.removeAt(Random().nextInt(imagesSource.length)));
+    images2.add(imagesSource.removeAt(Random().nextInt(imagesSource.length)));
+    images2.add(imagesSource.removeAt(0));
 
-    _toggleImage();
+    timer = _toggleImage();
   }
 
-  void _toggleImage() {
-    Timer.periodic(
+  Timer _toggleImage() => Timer.periodic(
       const Duration(seconds: 15),
       (timer) {
+        if (showFistImage) {
+          images2 = images2.reversed.toList();
+        } else {
+          images = images.reversed.toList();
+        }
         setState(() {
           showFistImage = !showFistImage;
         });
       }
     );
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   Widget _fadeInImage(String path) => Image(
@@ -79,7 +93,7 @@ class _BackgroundFadeImageState extends State<BackgroundFadeImage> {
               : CrossFadeState.showSecond,
           duration: const Duration(milliseconds: 700),
           firstChild: _fadeInImage(images[0]),
-          secondChild: _fadeInImage(images[1]),
+          secondChild: _fadeInImage(images2[0]),
         ),
         widget.child
       ],
