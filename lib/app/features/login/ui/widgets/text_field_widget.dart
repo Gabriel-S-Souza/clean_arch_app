@@ -52,45 +52,48 @@ class TextFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => TextFormField(
-    textCapitalization: textCapitalization,
-    inputFormatters: inputFormatters,
-    controller: controller,
-    keyboardType: textInputType,
-    textInputAction: textInputAction,
-    validator: (value) {
-      String? result;
-      if (validator != null) {
-        result = validator!(value);
-      }
-
-      return result;
-    },
-    onChanged: onChanged,
-    readOnly: readOnly,
-    minLines: 1,
-    textAlign: center ? TextAlign.center : TextAlign.left,
-    focusNode: focus,
-    textAlignVertical: TextAlignVertical.center,
-    enabled: enable ?? true,
-    maxLines: maxLines,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    onEditingComplete: onEditingComplete,
-    decoration: InputDecoration(
-      contentPadding: height != null
-          ? EdgeInsets.only(
-            bottom: height! * 0.16)
-          : null,
-      hintText: placeholder,
-      border: const OutlineInputBorder(borderSide: BorderSide()),
-      labelText: label,
-      fillColor: bgColor,
-      filled: true,
-      prefixIcon: preffixIcon != null 
-          ? Icon(preffixIcon) 
-          : null,
-      suffixIcon: suffix,
-      errorText: errorMessageAsync,
+  Widget build(BuildContext context) => SizedBox(
+    height: 54,
+    child: TextFormField(
+      textCapitalization: textCapitalization,
+      inputFormatters: inputFormatters,
+      controller: controller,
+      keyboardType: textInputType,
+      textInputAction: textInputAction,
+      validator: (value) {
+        String? result;
+        if (validator != null) {
+          result = validator!(value);
+        }
+  
+        return result;
+      },
+      onChanged: onChanged,
+      readOnly: readOnly,
+      minLines: 1,
+      textAlign: center ? TextAlign.center : TextAlign.left,
+      focusNode: focus,
+      textAlignVertical: TextAlignVertical.center,
+      enabled: enable ?? true,
+      maxLines: maxLines,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onEditingComplete: onEditingComplete,
+      decoration: InputDecoration(
+        contentPadding: height != null
+            ? EdgeInsets.only(
+              bottom: height! * 0.16)
+            : null,
+        hintText: placeholder,
+        border: const OutlineInputBorder(borderSide: BorderSide()),
+        labelText: label,
+        fillColor: bgColor,
+        filled: true,
+        prefixIcon: preffixIcon != null 
+            ? Icon(preffixIcon) 
+            : null,
+        suffixIcon: suffix,
+        errorText: errorMessageAsync,
+      ),
     ),
   );
 }

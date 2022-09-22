@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
               Positioned(
                 top: size.height * 0.27,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
+                  padding: const EdgeInsets.only(left: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Card(
-                    margin: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
