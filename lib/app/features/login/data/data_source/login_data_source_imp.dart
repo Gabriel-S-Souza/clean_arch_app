@@ -1,5 +1,5 @@
 import '../../../../core/core.dart';
-import '../../domain/entities/entities.dart';
+import '../../domain/domain.dart';
 import '../data.dart';
 
 class LoginDataSourceImp implements LoginDataSource {
@@ -9,9 +9,10 @@ class LoginDataSourceImp implements LoginDataSource {
   });
   
   @override
-  Future<UserEntity> login(LoginModel loginData) async {
+  Future<UserEntity> login(LoginEntity loginEntity) async {
     try {
-      final ResponseModel response = await httpClient.post(apiEndpointLogin, body: loginData.toJson());
+      final Map<String, dynamic> loginBody = LoginModel.fromEntity(loginEntity).toJson();
+      final ResponseModel response = await httpClient.post(apiEndpointLogin, body: loginBody);
       final responseEntity = UserModel.fromJson(response.body!).toEntity();
       return responseEntity;
     } 

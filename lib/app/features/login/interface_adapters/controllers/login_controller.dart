@@ -1,8 +1,5 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -49,7 +46,7 @@ abstract class LoginControllerBase with Store {
     if (formKey.currentState!.validate()) {
       isLoading = true;
 
-      final loginModel = LoginModel(user: user, password: password);
+      final loginModel = LoginEntity(user: user, password: password);
       final response = await _loginUseCase.login(loginModel);
 
       response.fold(

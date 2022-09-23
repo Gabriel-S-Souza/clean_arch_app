@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/core.dart';
 import '../../domain/domain.dart';
-import '../data.dart';
 
 class LoginRepositoryImp implements LoginRepository  {
   final LoginDataSource _dataSource;
@@ -10,9 +9,9 @@ class LoginRepositoryImp implements LoginRepository  {
   LoginRepositoryImp({required LoginDataSource dataSource}) : _dataSource = dataSource;
   
   @override
-  Future<Either<ExceptionApp, UserEntity>> login(LoginModel loginModel) async {
+  Future<Either<ExceptionApp, UserEntity>> login(LoginEntity loginEntity) async {
     try {
-      final response = await _dataSource.login(loginModel);
+      final response = await _dataSource.login(loginEntity);
       return right(response);
     } catch (e) {
       //TODO: implement treatments for different types of errors

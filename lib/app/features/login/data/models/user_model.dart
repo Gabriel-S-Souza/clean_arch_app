@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import '../../domain/domain.dart';
+import '../mapper/mapper.dart';
 import 'models.dart';
 
 class UserModel {
@@ -93,8 +94,8 @@ class UserModel {
     dateJoined: dateJoined, 
     createdAt: createdAt,
     updatedAt: updatedAt, 
-    emails: emails.map((email) => EmailEntity.fromModel(email)).toList(), 
-    phones: phones.map((phone) => PhoneEntity.fromModel(phone)).toList(), 
-    addresses: addresses.map((adress) => AddressEntity.fromModel(adress)).toList(),
+    emails: MapperApp.emailEntityFromModel(emails), 
+    phones: MapperApp.phoneEntityFromModel(phones), 
+    addresses: MapperApp.addressEntityFromModel(addresses),
   );
 }

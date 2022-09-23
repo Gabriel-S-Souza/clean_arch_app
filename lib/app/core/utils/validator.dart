@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 
-mixin Validator {
+class Validator {
 
   static String? validateEmail(String? value) {
     if (value != null && EmailValidator.validate(value)) return null;
