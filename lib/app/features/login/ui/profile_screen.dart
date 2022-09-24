@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w500
+                  fontWeight: FontWeight.w600
                 ),
               ),
               const SizedBox(height: 10),
@@ -101,11 +101,6 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.phone,
                     ),
                     _ItemListWidget(
-                      title: 'Endereço:',
-                      content: user.addresses.first.address1,
-                      icon: Icons.location_on,
-                    ),
-                    _ItemListWidget(
                       title: 'Estado:',
                       content: user.addresses.first.state,
                       icon: Icons.public,
@@ -114,6 +109,11 @@ class ProfileScreen extends StatelessWidget {
                       title: 'Cidade:',
                       content: user.addresses.first.locality,
                       icon: Icons.location_city,
+                    ),
+                    _ItemListWidget(
+                      title: 'Endereço:',
+                      content: user.addresses.first.address1,
+                      icon: Icons.location_on,
                     ),
                     _ItemListWidget(
                       title: 'Bairro:',

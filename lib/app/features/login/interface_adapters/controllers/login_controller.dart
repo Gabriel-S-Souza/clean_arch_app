@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -43,6 +41,7 @@ abstract class LoginControllerBase with Store {
       && Validator.validatePassword(password) == null;
 
   Future<void> login(BuildContext context) async {
+    FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
       isLoading = true;
 
@@ -59,17 +58,6 @@ abstract class LoginControllerBase with Store {
   }
 
   void _goToUserScreen(BuildContext context, UserEntity userEntity) {
-    log('navigate to user screen');
-    log('User');
-    log(userEntity.name);
-    log(userEntity.firstName);
-    log(userEntity.emails.first.email);
-    log(userEntity.createdAt);
-    log(userEntity.updatedAt);
-    log(userEntity.birthday ?? 'data dont found');
-    log(userEntity.phones.first.phone);
-    log(userEntity.addresses.first.address1);
-    log(userEntity.avatarUrl);
     Navigator.pushNamed(
       context, 
       '/profile', 
