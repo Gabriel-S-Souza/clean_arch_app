@@ -23,6 +23,7 @@ class TextFieldWidget extends StatelessWidget {
   final EdgeInsetsGeometry? containerPadding;
   final double? height;
   final bool readOnly;
+  final bool obscureText;
 
   const TextFieldWidget({
     Key? key,
@@ -46,13 +47,15 @@ class TextFieldWidget extends StatelessWidget {
     this.onChanged, 
     this.containerPadding, 
     this.height, 
-    this.readOnly = false,
+    this.readOnly = false, 
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => TextFormField(
     inputFormatters: inputFormatters,
     controller: controller,
+    obscureText: obscureText,
     keyboardType: textInputType,
     textInputAction: textInputAction,
     validator: validator,

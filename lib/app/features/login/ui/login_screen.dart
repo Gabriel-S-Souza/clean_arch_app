@@ -92,10 +92,21 @@ class LoginScreen extends StatelessWidget {
                                 validator: Validator.validateUser,
                               ),
                               const SizedBox(height: 18),
-                              TextFieldWidget(
-                                label: 'Senha',
-                                onChanged: _controller.setPassword,
-                                validator: Validator.validatePassword,
+                              Observer(
+                                builder: (context) => TextFieldWidget(
+                                    label: 'Senha',
+                                    obscureText: _controller.showPassword,
+                                    onChanged: _controller.setPassword,
+                                    validator: Validator.validatePassword,
+                                    suffix: IconButton(
+                                      onPressed: _controller.togglePassword,
+                                      icon: Icon(
+                                        _controller.showPassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility
+                                      ),
+                                    ),
+                                  )
                               ),
                               Align(
                                 alignment: Alignment.topRight,
