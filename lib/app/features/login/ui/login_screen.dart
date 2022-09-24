@@ -95,15 +95,15 @@ class LoginScreen extends StatelessWidget {
                               Observer(
                                 builder: (context) => TextFieldWidget(
                                     label: 'Senha',
-                                    obscureText: _controller.showPassword,
+                                    obscureText: !_controller.showPassword,
                                     onChanged: _controller.setPassword,
                                     validator: Validator.validatePassword,
                                     suffix: IconButton(
                                       onPressed: _controller.togglePassword,
                                       icon: Icon(
                                         _controller.showPassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility
+                                            ? Icons.visibility
+                                            : Icons.visibility_off
                                       ),
                                     ),
                                   )
@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.topRight,
                                 child: TextButton(
-                                  onPressed: () {}, 
+                                  onPressed: () {},
                                   child: const Text('Esqueci minha senha')
                                 ),
                               ),

@@ -127,12 +127,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     _ItemListWidget(
                       title: 'Criado em:',
-                      content: user.createdAt,
+                      content: user.createdAt.substring(0, 19),
                       icon: Icons.login,
                     ),
                     _ItemListWidget(
                       title: 'Atualizado em:',
-                      content: user.updatedAt,
+                      content: user.updatedAt.substring(0, 19),
                       icon: Icons.update,
                     ),
                   ],
