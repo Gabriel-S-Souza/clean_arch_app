@@ -34,6 +34,7 @@ class AppWidget extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         '/login': (BuildContext context) => LoginScreen(),
+        '/profile': (BuildContext context) => const ProfileScreen(),
       },
       initialRoute: '/login',
     );

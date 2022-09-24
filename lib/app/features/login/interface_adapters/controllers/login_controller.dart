@@ -62,15 +62,20 @@ abstract class LoginControllerBase with Store {
     log('navigate to user screen');
     log('User');
     log(userEntity.name);
+    log(userEntity.firstName);
     log(userEntity.emails.first.email);
+    log(userEntity.createdAt);
+    log(userEntity.updatedAt);
+    log(userEntity.birthday ?? 'data dont found');
     log(userEntity.phones.first.phone);
     log(userEntity.addresses.first.address1);
     log(userEntity.avatarUrl);
-    // Navigator.pushNamed(
-    //   context, 
-    //   '/user_screen', 
-    //   arguments: userEntity,
-    // );
+    Navigator.pushNamed(
+      context, 
+      '/profile', 
+      arguments: userEntity
+          ..usename = user,
+    );
   }
 
   void _showSnackbar(BuildContext context, String message, [bool isError = false]) {

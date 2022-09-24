@@ -1,6 +1,7 @@
 import 'entities.dart';
 
 class UserEntity {
+  String? usename;
   final String access;
   final String refresh;
   final String expireIn;
@@ -24,6 +25,7 @@ class UserEntity {
   final List<AddressEntity> addresses;
 
   UserEntity({
+    this.usename,
     required this.access, 
     required this.refresh, 
     required this.expireIn, 

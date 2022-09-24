@@ -26,6 +26,9 @@ dependencies:
 
   # form validator
   email_validator: ^2.1.17
+
+  # layout utilities
+  auto_size_text: ^3.0.0
   
   # others
   dartz: ^0.10.1
