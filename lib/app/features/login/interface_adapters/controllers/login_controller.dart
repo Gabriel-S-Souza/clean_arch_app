@@ -45,8 +45,8 @@ abstract class LoginControllerBase with Store {
     if (formKey.currentState!.validate()) {
       isLoading = true;
 
-      final loginModel = LoginEntity(user: user, password: password);
-      final response = await _loginUseCase.login(loginModel);
+      final loginEntity = LoginEntity(user: user, password: password);
+      final response = await _loginUseCase.login(loginEntity);
 
       response.fold(
         (exception) => _showSnackbar(context, exception.message ?? 'Houve um erro'), 
