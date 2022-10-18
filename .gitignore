@@ -34,6 +34,10 @@ migrate_working_dir/
 .pub/
 /build/
 
+/windows/
+/macos/
+/linux/
+
 # Symbolication related
 app.*.symbols
 
@@ -44,3 +48,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+generated_plugin_registrant.h
