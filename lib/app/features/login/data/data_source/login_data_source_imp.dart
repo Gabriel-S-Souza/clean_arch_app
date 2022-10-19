@@ -1,5 +1,4 @@
 import '../../../../core/core.dart';
-import '../../domain/domain.dart';
 import '../data.dart';
 
 class LoginDataSourceImp implements LoginDataSource {
@@ -7,16 +6,15 @@ class LoginDataSourceImp implements LoginDataSource {
   LoginDataSourceImp({
     required this.httpClient,
   });
-  
+
   @override
-  Future<UserEntity> login(LoginEntity loginEntity) async {
+  Future<UserModel> login(LoginModel loginModel) async {
     try {
-      final Map<String, dynamic> loginBody = LoginModel.fromEntity(loginEntity).toJson();
-      final ResponseModel response = await httpClient.post(apiEndpointLogin, body: loginBody);
-      final responseEntity = UserModel.fromJson(response.body!).toEntity();
-      return responseEntity;
-    } 
-    catch (e) {
+      final Map<String, dynamic> loginBody = loginModel.toJson();
+      final response = await httpClient.post(apiEndpointLogin, body: loginBody);
+      final UserModel userModel = UserModel.fromJson(response.body!);
+      return userModel;
+    } catch (e) {
       rethrow;
     }
   }

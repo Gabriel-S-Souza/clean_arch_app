@@ -1,5 +1,5 @@
-import '../../domain/entities/entities.dart';
+import '../data.dart';
 
 abstract class LoginDataSource {
-  Future<UserEntity> login(LoginEntity loginEntity);
+  Future<UserModel> login(LoginModel loginModel);
 }

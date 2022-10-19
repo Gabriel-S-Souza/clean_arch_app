@@ -13,8 +13,9 @@ class LoginRepositoryImp implements LoginRepository {
   Future<Either<ExceptionApp, UserEntity>> login(
       LoginEntity loginEntity) async {
     try {
-      final response = await _dataSource.login(loginEntity);
-      return right(response);
+      final loginModel = LoginModel.fromEntity(loginEntity);
+      final response = await _dataSource.login(loginModel);
+      return right(response.toEntity());
     } catch (e) {
       //TODO: implement treatments for different types of errors
       return left(
