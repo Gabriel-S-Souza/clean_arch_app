@@ -6,12 +6,12 @@ import '../../../features.dart';
 
 part 'login_controller.g.dart';
 
-class LoginController = LoginControllerBase 
-    with _$LoginController;
+class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
   final LoginUseCase _loginUseCase;
-  LoginControllerBase({required LoginUseCase loginUseCase}) : _loginUseCase = loginUseCase;
+  LoginControllerBase({required LoginUseCase loginUseCase})
+      : _loginUseCase = loginUseCase;
 
   final formKey = GlobalKey<FormState>();
 
@@ -32,13 +32,14 @@ abstract class LoginControllerBase with Store {
 
   @action
   void togglePassword() => showPassword = !showPassword;
-  
+
   @observable
   bool isLoading = false;
 
   @computed
-  bool get isValidForm => Validator.validateUser(user) == null
-      && Validator.validatePassword(password) == null;
+  bool get isValidForm =>
+      Validator.validateUser(user) == null &&
+      Validator.validatePassword(password) == null;
 
   Future<void> login(BuildContext context) async {
     FocusScope.of(context).unfocus();
@@ -48,10 +49,8 @@ abstract class LoginControllerBase with Store {
       final loginEntity = LoginEntity(user: user, password: password);
       final response = await _loginUseCase.login(loginEntity);
 
-      response.fold(
-        (exception) => _showSnackbar(context, exception.message ?? 'Houve um erro'), 
-        (userResponse) => _goToUserScreen(context, userResponse)
-      );
+      response.fold((exception) => _showSnackbar(context, exception.message),
+          (userResponse) => _goToUserScreen(context, userResponse));
 
       isLoading = false;
     }
@@ -59,20 +58,19 @@ abstract class LoginControllerBase with Store {
 
   void _goToUserScreen(BuildContext context, UserEntity userEntity) {
     Navigator.pushNamed(
-      context, 
-      '/profile', 
-      arguments: userEntity
-          ..usename = user,
+      context,
+      '/profile',
+      arguments: userEntity..usename = user,
     );
   }
 
-  void _showSnackbar(BuildContext context, String message, [bool isError = false]) {
+  void _showSnackbar(BuildContext context, String message,
+      [bool isError = false]) {
     SnackbarApp.showSnackbarApp(
       context: context,
       message: message,
-      backgroundColor: Theme.of(
-        context
-      ).colorScheme.onBackground.withAlpha(200),
+      backgroundColor:
+          Theme.of(context).colorScheme.onBackground.withAlpha(200),
       isError: isError,
     );
   }

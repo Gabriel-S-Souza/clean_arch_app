@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../../core/core.dart';
-import '../../data.dart';
+import '../../../../features.dart';
 
 class HttpClientImp implements HttpClient {
   final Dio _dio;
