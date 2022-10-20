@@ -21,10 +21,9 @@ class HttpClientImp implements HttpClient {
       {Map<String, String> headers = const {'Content-Type': 'application/json'},
       required Map<String, dynamic> body}) async {
     try {
-      final Response response = await _dio.post(endpoint,
-          options: Options(headers: headers), data: body);
-      return ResponseModel(
-          statusCode: response.statusCode ?? 0, body: response.data);
+      final Response response =
+          await _dio.post(endpoint, options: Options(headers: headers), data: body);
+      return ResponseModel(statusCode: response.statusCode ?? 0, body: response.data);
     } catch (e) {
       throw _handleError(e);
     }
@@ -32,8 +31,7 @@ class HttpClientImp implements HttpClient {
 
   ExceptionApp _handleError(Object e) {
     if (e is DioError) {
-      final bool isConnectTimeoutException =
-          e.type == DioErrorType.connectTimeout;
+      final bool isConnectTimeoutException = e.type == DioErrorType.connectTimeout;
 
       final bool isServerException = e.type == DioErrorType.cancel ||
           e.type == DioErrorType.receiveTimeout ||
@@ -43,14 +41,13 @@ class HttpClientImp implements HttpClient {
         return ConnectTimeoutException();
       } else if (isServerException) {
         return ServerException();
-      } else if (e.response?.statusCode != null &&
-          e.response?.statusCode == 401) {
+      } else if (e.response?.statusCode != null && e.response?.statusCode == 401) {
         return CredentialsException();
       } else {
-        return NotFoundException();
+        return NotFoundException(e.message.toString());
       }
     } else {
-      return NotFoundException();
+      return NotFoundException(e.toString());
     }
   }
 }

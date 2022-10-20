@@ -64,13 +64,15 @@ abstract class LoginControllerBase with Store {
     );
   }
 
-  void _showSnackbar(BuildContext context, String message,
-      [bool isError = false]) {
+  void _showSnackbar(
+    BuildContext context,
+    String message, [
+    bool isError = false,
+  ]) {
     SnackbarApp.showSnackbarApp(
       context: context,
       message: message,
-      backgroundColor:
-          Theme.of(context).colorScheme.onBackground.withAlpha(200),
+      backgroundColor: Theme.of(context).colorScheme.onBackground.withAlpha(200),
       isError: isError,
     );
   }
