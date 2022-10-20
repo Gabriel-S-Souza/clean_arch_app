@@ -14,6 +14,18 @@ void main() {
   final userEntity = UserEntityFake();
 
   group('Login use case |', () {
+    test('LoginRepository.login method must be called 1 time', () async {
+      // arrange
+      when(() => loginRepository.login(loginEntity))
+          .thenAnswer((_) async => Right(userEntity));
+
+      // act
+      await loginUseCase.login(loginEntity);
+
+      // assert
+      verify(() => loginRepository.login(loginEntity)).called(1);
+    });
+
     test('Success: login method must return a UserEntity', () async {
       // arrange
       when(() => loginRepository.login(loginEntity))
