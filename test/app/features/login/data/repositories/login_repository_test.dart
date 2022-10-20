@@ -40,7 +40,7 @@ void main() {
     });
 
     test(
-        'Error: when loginDataSource.login method throws an ExceptionApp, should return a Left(ExceptionApp)',
+        'Exception: when loginDataSource.login method throws an ExceptionApp, should return a Left(ExceptionApp)',
         () async {
       // arrange
       when(() => loginDataSource.login(any())).thenThrow(CredentialsException());
