@@ -10,19 +10,19 @@ class HttpClientImp implements HttpClient {
       : _dio = dio ??
             Dio(
               BaseOptions(
-                baseUrl: apiDomain + apiBasePath,
-                connectTimeout: 10000,
-                receiveTimeout: 10000,
-              ),
+                  baseUrl: apiDomain + apiBasePath,
+                  connectTimeout: 10000,
+                  receiveTimeout: 10000,
+                  headers: {'Content-Type': 'application/json'}),
             );
 
   @override
-  Future<ResponseModel> post(String endpoint,
-      {Map<String, String> headers = const {'Content-Type': 'application/json'},
-      required Map<String, dynamic> body}) async {
+  Future<ResponseModel> post(
+    String endpoint, {
+    required Map<String, dynamic> body,
+  }) async {
     try {
-      final Response response =
-          await _dio.post(endpoint, options: Options(headers: headers), data: body);
+      final Response response = await _dio.post(endpoint, data: body);
       return ResponseModel(statusCode: response.statusCode ?? 0, body: response.data);
     } catch (e) {
       throw _handleError(e);
@@ -31,23 +31,19 @@ class HttpClientImp implements HttpClient {
 
   ExceptionApp _handleError(Object e) {
     if (e is DioError) {
-      final bool isConnectTimeoutException = e.type == DioErrorType.connectTimeout;
-
-      final bool isServerException = e.type == DioErrorType.cancel ||
-          e.type == DioErrorType.receiveTimeout ||
-          e.type == DioErrorType.other;
-
-      if (isConnectTimeoutException) {
+      if (e.type == DioErrorType.connectTimeout) {
         return ConnectTimeoutException();
-      } else if (isServerException) {
+      } else if (e.type == DioErrorType.cancel ||
+          e.type == DioErrorType.receiveTimeout ||
+          e.type == DioErrorType.other) {
         return ServerException();
       } else if (e.response?.statusCode != null && e.response?.statusCode == 401) {
         return CredentialsException();
       } else {
-        return NotFoundException(e.message.toString());
+        return NotFoundException();
       }
     } else {
-      return NotFoundException(e.toString());
+      return NotFoundException();
     }
   }
 }
