@@ -1,5 +1,5 @@
-import 'package:clean_arch/app/features/features.dart';
-import 'package:clean_arch/app/features/login/data/mapper/mapper.dart';
+import 'package:clean_arch/features/login/data/mapper/mapper_app.dart';
+import 'package:clean_arch/features/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

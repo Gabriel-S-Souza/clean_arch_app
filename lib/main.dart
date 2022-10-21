@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app/app.dart';
+import 'app_widget.dart';
+import 'di/di.dart';
 
 void main() {
   ServiceLocatorImp.I.setupLocator();

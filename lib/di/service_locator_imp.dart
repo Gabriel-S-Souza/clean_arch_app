@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import '../app.dart';
 import '../features/features.dart';
+import 'service_locator.dart';
 
 class ServiceLocatorImp implements ServiceLocator {
   ServiceLocatorImp._internal();

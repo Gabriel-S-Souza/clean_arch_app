@@ -10,8 +10,7 @@ class BackgroundImageComponent extends StatefulWidget {
   final Widget child;
 
   @override
-  State<BackgroundImageComponent> createState() =>
-      _BackgroundImageComponentState();
+  State<BackgroundImageComponent> createState() => _BackgroundImageComponentState();
 }
 
 class _BackgroundImageComponentState extends State<BackgroundImageComponent> {
@@ -26,10 +25,10 @@ class _BackgroundImageComponentState extends State<BackgroundImageComponent> {
   void initState() {
     super.initState();
     final imagesSource = [
-      Assets.girl,
-      Assets.girl2,
-      Assets.girl3,
-      Assets.girl4,
+      Assets.person,
+      Assets.person2,
+      Assets.person3,
+      Assets.person4,
     ];
 
     images.add(imagesSource.removeAt(Random().nextInt(imagesSource.length)));
@@ -67,8 +66,7 @@ class _BackgroundImageComponentState extends State<BackgroundImageComponent> {
   Widget build(BuildContext context) => Stack(
         children: [
           AnimatedCrossFade(
-            layoutBuilder:
-                (topChild, topChildKey, bottomChild, bottomChildKey) => Stack(
+            layoutBuilder: (topChild, topChildKey, bottomChild, bottomChildKey) => Stack(
               children: [
                 Positioned(
                   key: topChildKey,
@@ -86,9 +84,8 @@ class _BackgroundImageComponentState extends State<BackgroundImageComponent> {
             ),
             firstCurve: Curves.bounceInOut,
             secondCurve: Curves.bounceInOut,
-            crossFadeState: showFistImage
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
+            crossFadeState:
+                showFistImage ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             duration: const Duration(milliseconds: 700),
             firstChild: _fadeInImage(images[0]),
             secondChild: _fadeInImage(images2[0]),

@@ -1,8 +1,8 @@
-import 'package:clean_arch/app/features/features.dart';
+import 'package:clean_arch/features/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../../fixtures/login_response_fixture.dart';
+import '../../../../fixtures/login_response_fixture.dart';
 
 class HttpClientMock extends Mock implements HttpClient {}
 
