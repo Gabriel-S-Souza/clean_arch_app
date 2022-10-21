@@ -27,7 +27,7 @@ void main() {
       verify(() => loginDataSource.login(any())).called(1);
     });
 
-    test('Success: login method must return a Right(UserEntity)', () async {
+    test('Success: login method must return a UserEntity', () async {
       // arrange
       when(() => loginDataSource.login(any())).thenAnswer((_) async => userModel);
 
@@ -40,7 +40,7 @@ void main() {
     });
 
     test(
-        'Exception: when loginDataSource.login method throws an ExceptionApp, should return a Left(ExceptionApp)',
+        'Exception: when loginDataSource.login method throws an ExceptionApp, should return that ExceptionApp',
         () async {
       // arrange
       when(() => loginDataSource.login(any())).thenThrow(CredentialsException());

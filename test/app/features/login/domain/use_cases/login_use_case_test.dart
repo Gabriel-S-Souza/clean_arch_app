@@ -26,7 +26,7 @@ void main() {
       verify(() => loginRepository.login(loginEntity)).called(1);
     });
 
-    test('Success: login method must return a Right(UserEntity)', () async {
+    test('Success: login method must return a UserEntity', () async {
       // arrange
       when(() => loginRepository.login(loginEntity))
           .thenAnswer((_) async => Right(userEntity));
@@ -39,7 +39,7 @@ void main() {
       expect(response.fold(id, id), isA<UserEntity>());
     });
 
-    test('Exception: login method must return a Left(ExceptionApp)', () async {
+    test('Exception: login method must return a ExceptionApp', () async {
       // arrange
       when(() => loginRepository.login(loginEntity))
           .thenAnswer((_) async => Left(CredentialsException()));
