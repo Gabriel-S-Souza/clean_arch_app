@@ -1,2 +1,2 @@
-export 'di_app.dart';
-export 'di_app_imp.dart';
+export 'service_locator.dart';
+export 'service_locator_imp.dart';
