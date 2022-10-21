@@ -10,7 +10,7 @@ class ServerException extends ExceptionApp {
 }
 
 class CredentialsException extends ExceptionApp {
-  CredentialsException([String message = 'Login e/ou senhas inválidos'])
+  CredentialsException([String message = 'Login e/ou senha inválidos'])
       : super(message);
 }
 
