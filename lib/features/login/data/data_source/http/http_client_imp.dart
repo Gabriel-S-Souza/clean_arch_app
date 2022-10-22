@@ -42,8 +42,7 @@ class HttpClientImp implements HttpClient {
       } else {
         return NotFoundException();
       }
-    } else {
-      return NotFoundException();
     }
+    return NotFoundException();
   }
 }
