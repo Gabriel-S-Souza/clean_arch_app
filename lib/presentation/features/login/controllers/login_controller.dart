@@ -13,6 +13,8 @@ abstract class LoginControllerBase with Store {
   LoginControllerBase({required LoginUseCase loginUseCase})
       : _loginUseCase = loginUseCase;
 
+  final appController = GlobalKey<FormState>();
+
   final formKey = GlobalKey<FormState>();
 
   @observable
@@ -49,8 +51,14 @@ abstract class LoginControllerBase with Store {
       final loginEntity = LoginEntity(user: user, password: password);
       final response = await _loginUseCase.login(loginEntity);
 
-      response.fold((exception) => _showSnackbar(context, exception.message),
-          (userResponse) => _goToUserScreen(context, userResponse));
+      response.fold(
+        (exception) {
+          _showSnackbar(context, exception.message);
+        },
+        (userResponse) {
+          _goToUserScreen(context, userResponse);
+        },
+      );
 
       isLoading = false;
     }

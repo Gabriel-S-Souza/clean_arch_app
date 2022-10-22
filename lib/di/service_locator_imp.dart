@@ -16,14 +16,22 @@ class ServiceLocatorImp implements ServiceLocator {
     // http
     _getIt.registerFactory<HttpClient>(() => HttpClientImp());
 
-    // datasource
+    // datasources
     _getIt.registerFactory<LoginDataSource>(
       () => LoginDataSourceImp(httpClient: _getIt()),
     );
 
-    // repository
+    _getIt.registerLazySingleton<MemoryDataSource>(
+      () => MemoryDataSourceImp(),
+    );
+
+    // repositories
     _getIt.registerFactory<LoginRepository>(
       () => LoginRepositoryImp(dataSource: _getIt()),
+    );
+
+    _getIt.registerFactory<MemoryRepository>(
+      () => MemoryRepositoryImp(dataSource: _getIt()),
     );
 
     // usecase
