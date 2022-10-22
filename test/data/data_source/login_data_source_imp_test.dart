@@ -3,7 +3,7 @@ import 'package:clean_arch/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fixtures/login_response_fixture.dart';
+import '../../fixtures/login_response_fixture.dart';
 
 class HttpClientMock extends Mock implements HttpClient {}
 
