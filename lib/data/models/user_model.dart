@@ -25,33 +25,32 @@ class UserModel {
   final List<PhoneModel> phones;
   final List<AddressModel> addresses;
 
-  UserModel({
-    required this.access, 
-    required this.refresh, 
-    required this.expireIn, 
-    required this.id, 
-    required this.avatarUrl, 
-    required this.name, 
-    required this.firstName, 
-    required this.lastName, 
-    this.taxpayerId, 
-    this.taxpayerIdFormatted, 
-    this.identityDocument, 
-    this.birthday, 
-    required this.isBlocked, 
-    required this.isStaff, 
-    required this.isActive, 
-    required this.dateJoined, 
-    required this.createdAt, 
-    required this.updatedAt, 
-    required this.emails, 
-    required this.phones, 
-    required this.addresses
-  });
+  UserModel(
+      {required this.access,
+      required this.refresh,
+      required this.expireIn,
+      required this.id,
+      required this.avatarUrl,
+      required this.name,
+      required this.firstName,
+      required this.lastName,
+      this.taxpayerId,
+      this.taxpayerIdFormatted,
+      this.identityDocument,
+      this.birthday,
+      required this.isBlocked,
+      required this.isStaff,
+      required this.isActive,
+      required this.dateJoined,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.emails,
+      required this.phones,
+      required this.addresses});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final Map<String, dynamic> userMap = json['user'];
-    
+
     return UserModel(
       access: json['access'],
       refresh: json['refresh'],
@@ -71,29 +70,55 @@ class UserModel {
       dateJoined: userMap['dateJoined'],
       createdAt: userMap['createdAt'],
       updatedAt: userMap['updatedAt'],
-      emails: List<Map<String, dynamic>>.from(userMap['emails']).map(EmailModel.fromJson).toList(),
-      phones: List<Map<String, dynamic>>.from(userMap['phones']).map(PhoneModel.fromJson).toList(),
-      addresses: List<Map<String, dynamic>>.from(userMap['addresses']).map(AddressModel.fromJson).toList(),
+      emails: List<Map<String, dynamic>>.from(userMap['emails'])
+          .map(EmailModel.fromJson)
+          .toList(),
+      phones: List<Map<String, dynamic>>.from(userMap['phones'])
+          .map(PhoneModel.fromJson)
+          .toList(),
+      addresses: List<Map<String, dynamic>>.from(userMap['addresses'])
+          .map(AddressModel.fromJson)
+          .toList(),
     );
   }
 
+  factory UserModel.fromEntity(entity) => UserModel(
+        access: entity.access,
+        refresh: entity.refresh,
+        expireIn: entity.expireIn,
+        id: entity.id,
+        avatarUrl: entity.avatarUrl,
+        name: entity.name,
+        firstName: entity.firstName,
+        lastName: entity.lastName,
+        isBlocked: entity.isBlocked,
+        isStaff: entity.isStaff,
+        isActive: entity.isActive,
+        dateJoined: entity.dateJoined,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        emails: entity.emails,
+        phones: entity.phones,
+        addresses: entity.addresses,
+      );
+
   UserEntity toEntity() => UserEntity(
-    access: access,
-    refresh: refresh,
-    expireIn: expireIn,
-    id: id, avatarUrl: 
-    avatarUrl,
-    name: name,
-    firstName: firstName,
-    lastName: lastName,
-    isBlocked: isBlocked,
-    isStaff: isStaff, 
-    isActive: isActive, 
-    dateJoined: dateJoined, 
-    createdAt: createdAt,
-    updatedAt: updatedAt, 
-    emails: MapperApp.emailEntityFromModel(emails), 
-    phones: MapperApp.phoneEntityFromModel(phones), 
-    addresses: MapperApp.addressEntityFromModel(addresses),
-  );
+        access: access,
+        refresh: refresh,
+        expireIn: expireIn,
+        id: id,
+        avatarUrl: avatarUrl,
+        name: name,
+        firstName: firstName,
+        lastName: lastName,
+        isBlocked: isBlocked,
+        isStaff: isStaff,
+        isActive: isActive,
+        dateJoined: dateJoined,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        emails: MapperApp.emailEntityFromModel(emails),
+        phones: MapperApp.phoneEntityFromModel(phones),
+        addresses: MapperApp.addressEntityFromModel(addresses),
+      );
 }

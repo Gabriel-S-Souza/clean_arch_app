@@ -1,7 +1,7 @@
-import '../../../domain/domain.dart';
+import '../../data.dart';
 
 abstract class MemoryDataSource {
-  late UserEntity currentUser;
-  UserEntity getCurrentUser();
-  void updateCurrentUser(UserEntity user);
+  late UserModel currentUser;
+  UserModel getCurrentUser();
+  void updateCurrentUser(UserModel user);
 }
