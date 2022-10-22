@@ -42,7 +42,7 @@ void main() {
     test('Exception: login method must return a ExceptionApp', () async {
       // arrange
       when(() => loginRepository.login(loginEntity))
-          .thenAnswer((_) async => Left(CredentialsException()));
+          .thenAnswer((_) async => Left(ServerException()));
 
       // act
       final response = await loginUseCase.login(loginEntity);

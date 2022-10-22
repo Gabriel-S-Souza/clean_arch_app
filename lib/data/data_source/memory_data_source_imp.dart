@@ -1,12 +1,11 @@
 import '../data.dart';
 
 class MemoryDataSourceImp implements MemoryDataSource {
-  @override
-  late UserModel currentUser;
+  UserModel? _currentUser;
 
   @override
-  UserModel getCurrentUser() => currentUser;
+  UserModel? getCurrentUser() => _currentUser;
 
   @override
-  void updateCurrentUser(UserModel user) => currentUser = user;
+  void putCurrentUser(UserModel user) => _currentUser = user;
 }

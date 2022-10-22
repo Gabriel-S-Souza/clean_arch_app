@@ -7,9 +7,9 @@ class MemoryRepositoryImp implements MemoryRepository {
   MemoryRepositoryImp({required MemoryDataSource dataSource}) : _dataSource = dataSource;
 
   @override
-  UserEntity getCurrentUser() => _dataSource.getCurrentUser().toEntity();
+  UserEntity? getCurrentUser() => _dataSource.getCurrentUser()?.toEntity();
 
   @override
-  void updateCurrentUser(UserEntity user) =>
-      _dataSource.updateCurrentUser(UserModel.fromEntity(user));
+  void putCurrentUser(UserEntity user) =>
+      _dataSource.putCurrentUser(UserModel.fromEntity(user));
 }
