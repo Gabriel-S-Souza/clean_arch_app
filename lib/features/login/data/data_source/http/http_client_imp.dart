@@ -35,7 +35,8 @@ class HttpClientImp implements HttpClient {
         return ConnectTimeoutException();
       } else if (e.type == DioErrorType.cancel ||
           e.type == DioErrorType.receiveTimeout ||
-          e.type == DioErrorType.other) {
+          e.type == DioErrorType.other ||
+          e.type == DioErrorType.response) {
         return ServerException();
       } else if (e.response?.statusCode != null && e.response?.statusCode == 401) {
         return CredentialsException();
