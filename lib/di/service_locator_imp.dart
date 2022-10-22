@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 
-import '../features/features.dart';
+import '../data/data.dart';
+import '../domain/domain.dart';
+import '../presentation/presentation.dart';
 import 'service_locator.dart';
 
 class ServiceLocatorImp implements ServiceLocator {

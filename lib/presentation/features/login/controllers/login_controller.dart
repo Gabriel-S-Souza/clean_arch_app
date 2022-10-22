@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/core.dart';
-import '../../../features.dart';
+import '../../../../domain/domain.dart';
 
 part 'login_controller.g.dart';
 

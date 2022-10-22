@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 
 import '../../../../../core/core.dart';
-import '../../../../features.dart';
+import '../../../domain/domain.dart';
+import '../../models/models.dart';
+import 'http_client.dart';
 
 class HttpClientImp implements HttpClient {
   final Dio _dio;
@@ -10,10 +12,11 @@ class HttpClientImp implements HttpClient {
       : _dio = dio ??
             Dio(
               BaseOptions(
-                  baseUrl: apiDomain + apiBasePath,
-                  connectTimeout: 10000,
-                  receiveTimeout: 10000,
-                  headers: {'Content-Type': 'application/json'}),
+                baseUrl: apiDomain + apiBasePath,
+                connectTimeout: 10000,
+                receiveTimeout: 10000,
+                headers: {'Content-Type': 'application/json'},
+              ),
             );
 
   @override

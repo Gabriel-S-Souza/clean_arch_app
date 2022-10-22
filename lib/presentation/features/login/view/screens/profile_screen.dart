@@ -1,15 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../features.dart';
+import '../../../../../domain/domain.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final UserEntity user =
-        ModalRoute.of(context)?.settings.arguments as UserEntity;
+    final UserEntity user = ModalRoute.of(context)?.settings.arguments as UserEntity;
 
     return LayoutBuilder(
       builder: (context, constraints) => Scaffold(
@@ -60,8 +59,7 @@ class ProfileScreen extends StatelessWidget {
                         width: constraints.maxWidth,
                         child: CircleAvatar(
                           radius: 54,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                           child: Image.network(
                             user.avatarUrl,
                             fit: BoxFit.cover,
@@ -86,8 +84,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color:
-                        Theme.of(context).colorScheme.onSurface.withAlpha(160)),
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha(160)),
               ),
               const SizedBox(height: 24),
               Expanded(
@@ -146,8 +143,7 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class _ItemListWidget extends StatelessWidget {
-  const _ItemListWidget(
-      {required this.title, required this.content, required this.icon});
+  const _ItemListWidget({required this.title, required this.content, required this.icon});
   final String title;
   final String content;
   final IconData icon;
