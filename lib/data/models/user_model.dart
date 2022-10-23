@@ -3,9 +3,6 @@ import '../mapper/mapper.dart';
 import 'models.dart';
 
 class UserModel {
-  final String access;
-  final String refresh;
-  final String expireIn;
   final int id;
   final String avatarUrl;
   final String name;
@@ -26,10 +23,7 @@ class UserModel {
   final List<AddressModel> addresses;
 
   UserModel(
-      {required this.access,
-      required this.refresh,
-      required this.expireIn,
-      required this.id,
+      {required this.id,
       required this.avatarUrl,
       required this.name,
       required this.firstName,
@@ -48,44 +42,34 @@ class UserModel {
       required this.phones,
       required this.addresses});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    final Map<String, dynamic> userMap = json['user'];
-
-    return UserModel(
-      access: json['access'],
-      refresh: json['refresh'],
-      expireIn: json['expireIn'],
-      id: userMap['id'],
-      avatarUrl: userMap['avatarUrl'],
-      name: userMap['name'],
-      firstName: userMap['firstName'],
-      lastName: userMap['lastName'],
-      taxpayerId: userMap['taxpayerId'],
-      taxpayerIdFormatted: userMap['taxpayerIdFormatted'],
-      identityDocument: userMap['identityDocument'],
-      birthday: userMap['birthday'],
-      isBlocked: userMap['isBlocked'],
-      isStaff: userMap['isStaff'],
-      isActive: userMap['isActive'],
-      dateJoined: userMap['dateJoined'],
-      createdAt: userMap['createdAt'],
-      updatedAt: userMap['updatedAt'],
-      emails: List<Map<String, dynamic>>.from(userMap['emails'])
-          .map(EmailModel.fromJson)
-          .toList(),
-      phones: List<Map<String, dynamic>>.from(userMap['phones'])
-          .map(PhoneModel.fromJson)
-          .toList(),
-      addresses: List<Map<String, dynamic>>.from(userMap['addresses'])
-          .map(AddressModel.fromJson)
-          .toList(),
-    );
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json['id'],
+        avatarUrl: json['avatarUrl'],
+        name: json['name'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        taxpayerId: json['taxpayerId'],
+        taxpayerIdFormatted: json['taxpayerIdFormatted'],
+        identityDocument: json['identityDocument'],
+        birthday: json['birthday'],
+        isBlocked: json['isBlocked'],
+        isStaff: json['isStaff'],
+        isActive: json['isActive'],
+        dateJoined: json['dateJoined'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        emails: List<Map<String, dynamic>>.from(json['emails'])
+            .map(EmailModel.fromJson)
+            .toList(),
+        phones: List<Map<String, dynamic>>.from(json['phones'])
+            .map(PhoneModel.fromJson)
+            .toList(),
+        addresses: List<Map<String, dynamic>>.from(json['addresses'])
+            .map(AddressModel.fromJson)
+            .toList(),
+      );
 
   factory UserModel.fromEntity(entity) => UserModel(
-        access: entity.access,
-        refresh: entity.refresh,
-        expireIn: entity.expireIn,
         id: entity.id,
         avatarUrl: entity.avatarUrl,
         name: entity.name,
@@ -103,14 +87,15 @@ class UserModel {
       );
 
   UserEntity toEntity() => UserEntity(
-        access: access,
-        refresh: refresh,
-        expireIn: expireIn,
         id: id,
         avatarUrl: avatarUrl,
         name: name,
         firstName: firstName,
         lastName: lastName,
+        birthday: birthday,
+        identityDocument: identityDocument,
+        taxpayerId: taxpayerId,
+        taxpayerIdFormatted: taxpayerIdFormatted,
         isBlocked: isBlocked,
         isStaff: isStaff,
         isActive: isActive,

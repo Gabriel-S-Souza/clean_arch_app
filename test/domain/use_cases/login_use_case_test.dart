@@ -20,7 +20,7 @@ void main() {
           .thenAnswer((_) async => Right(userEntity));
 
       // act
-      await loginUseCase.login(loginEntity);
+      await loginUseCase(loginEntity);
 
       // assert
       verify(() => loginRepository.login(loginEntity)).called(1);
@@ -32,7 +32,7 @@ void main() {
           .thenAnswer((_) async => Right(userEntity));
 
       // act
-      final response = await loginUseCase.login(loginEntity);
+      final response = await loginUseCase(loginEntity);
 
       // assert
       expect(response.isRight(), equals(true));
@@ -45,7 +45,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerException()));
 
       // act
-      final response = await loginUseCase.login(loginEntity);
+      final response = await loginUseCase(loginEntity);
 
       // assert
       expect(response.isLeft(), equals(true));

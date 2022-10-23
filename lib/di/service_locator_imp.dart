@@ -12,36 +12,44 @@ class ServiceLocatorImp implements ServiceLocator {
   final _getIt = GetIt.instance;
 
   @override
-  void setupLocator() async {
+  Future<void> setupLocator() async {
     // http
     _getIt.registerFactory<HttpClient>(() => HttpClientImp());
 
     // datasources
-    _getIt.registerFactory<LoginDataSource>(
-      () => LoginDataSourceImp(httpClient: _getIt()),
+    _getIt.registerFactory<RemoteDataSource>(
+      () => RemoteDataSourceImp(httpClient: _getIt()),
     );
+
+    final localDataSource = LocalDataSourceImp();
+    await localDataSource.initialize();
+
+    _getIt.registerSingleton<LocalDataSource>(localDataSource);
 
     _getIt.registerLazySingleton<MemoryDataSource>(
       () => MemoryDataSourceImp(),
     );
 
-    // repositories
+    // repository
     _getIt.registerFactory<LoginRepository>(
-      () => LoginRepositoryImp(dataSource: _getIt()),
+      () => LoginRepositoryImp(
+          remoteDataSource: _getIt(),
+          localDataSource: _getIt(),
+          memoryDataSource: _getIt()),
     );
 
-    _getIt.registerFactory<MemoryRepository>(
-      () => MemoryRepositoryImp(dataSource: _getIt()),
-    );
-
-    // usecase
+    // usecases
     _getIt.registerFactory<LoginUseCase>(
-      () => LoginUseCase(repository: _getIt()),
+      () => LoginUseCaseImp(repository: _getIt()),
     );
 
-    // controller
+    // controllers
     _getIt.registerLazySingleton<LoginController>(
       () => LoginController(loginUseCase: _getIt()),
+    );
+
+    _getIt.registerLazySingleton<HomeController>(
+      () => HomeController(),
     );
   }
 

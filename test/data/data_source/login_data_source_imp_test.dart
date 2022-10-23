@@ -9,7 +9,7 @@ class HttpClientMock extends Mock implements HttpClient {}
 
 void main() {
   final httpClient = HttpClientMock();
-  final loginDataSource = LoginDataSourceImp(httpClient: httpClient);
+  final RemoteDataSource = RemoteDataSourceImp(httpClient: httpClient);
   final responseModel = ResponseModel(
     statusCode: 200,
     body: loginResponseFixture,
@@ -23,7 +23,7 @@ void main() {
           .thenAnswer((_) async => responseModel);
 
       // act
-      await loginDataSource.login(loginModel);
+      await RemoteDataSource.login(loginModel);
 
       // assert
       verify(() => httpClient.post(any(), body: any(named: 'body'))).called(1);
@@ -35,7 +35,7 @@ void main() {
           .thenAnswer((_) async => responseModel);
 
       // act
-      final response = await loginDataSource.login(loginModel);
+      final response = await RemoteDataSource.login(loginModel);
 
       // assert
       expect(response, isA<UserModel>());
@@ -50,7 +50,7 @@ void main() {
 
       // act & assert
       expect(
-        () async => loginDataSource.login(loginModel),
+        () async => RemoteDataSource.login(loginModel),
         throwsA(isA<ConnectTimeoutException>()),
       );
     });

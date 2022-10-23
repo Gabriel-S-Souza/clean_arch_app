@@ -1,6 +1,6 @@
 import '../../data.dart';
 
 abstract class MemoryDataSource {
-  UserModel? getCurrentUser();
-  void putCurrentUser(UserModel user);
+  UserModel? getSessionUser();
+  void putSessionUser(UserModel user);
 }

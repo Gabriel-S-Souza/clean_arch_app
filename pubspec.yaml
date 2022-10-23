@@ -22,6 +22,10 @@ dependencies:
 
   # http
   dio: ^4.0.6
+  
+  # data base
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   # form validator
   email_validator: ^2.1.17

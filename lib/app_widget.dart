@@ -12,8 +12,9 @@ class AppWidget extends StatelessWidget {
         theme: ThemeApp.theme,
         routes: <String, WidgetBuilder>{
           '/login': (BuildContext context) => LoginScreen(),
+          '/home': (BuildContext context) => HomeScreen(),
           '/profile': (BuildContext context) => const ProfileScreen(),
         },
-        initialRoute: '/login',
+        initialRoute: '/home',
       );
 }

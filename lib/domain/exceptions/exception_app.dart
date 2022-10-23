@@ -1,25 +1,34 @@
 abstract class ExceptionApp implements Exception {
   final String message;
+  final int? statusCode;
 
-  ExceptionApp(this.message);
+  ExceptionApp({required this.message, required this.statusCode});
 }
 
 class ServerException extends ExceptionApp {
-  ServerException([String message = 'Erro na comunicação com o servidor'])
-      : super(message);
+  ServerException({
+    String message = 'Erro na comunicação com o servidor',
+    int? statusCode,
+  }) : super(message: message, statusCode: statusCode);
 }
 
 class CredentialsException extends ExceptionApp {
-  CredentialsException([String message = 'Login e/ou senha inválidos'])
-      : super(message);
+  CredentialsException({
+    String message = 'Credenciais inválidas',
+    int? statusCode,
+  }) : super(message: message, statusCode: statusCode);
 }
 
 class ConnectTimeoutException extends ExceptionApp {
-  ConnectTimeoutException(
-      [String message = 'Verifique sua conexão com a internet'])
-      : super(message);
+  ConnectTimeoutException({
+    String message = 'Verifique sua comunicação com a internet',
+    int? statusCode,
+  }) : super(message: message, statusCode: statusCode);
 }
 
 class NotFoundException extends ExceptionApp {
-  NotFoundException([String message = 'Ops, algo deu errado']) : super(message);
+  NotFoundException({
+    String message = 'Ops, algo deu errado',
+    int? statusCode,
+  }) : super(message: message, statusCode: statusCode);
 }

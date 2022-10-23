@@ -2,9 +2,6 @@ import 'entities.dart';
 
 class UserEntity {
   String? usename;
-  final String access;
-  final String refresh;
-  final String expireIn;
   final int id;
   final String avatarUrl;
   final String name;
@@ -24,28 +21,24 @@ class UserEntity {
   final List<PhoneEntity> phones;
   final List<AddressEntity> addresses;
 
-  UserEntity({
-    this.usename,
-    required this.access, 
-    required this.refresh, 
-    required this.expireIn, 
-    required this.id, 
-    required this.avatarUrl, 
-    required this.name, 
-    required this.firstName, 
-    required this.lastName, 
-    this.taxpayerId, 
-    this.taxpayerIdFormatted, 
-    this.identityDocument, 
-    this.birthday, 
-    required this.isBlocked, 
-    required this.isStaff, 
-    required this.isActive, 
-    required this.dateJoined, 
-    required this.createdAt, 
-    required this.updatedAt, 
-    required this.emails, 
-    required this.phones, 
-    required this.addresses
-  });
+  UserEntity(
+      {this.usename,
+      required this.id,
+      required this.avatarUrl,
+      required this.name,
+      required this.firstName,
+      required this.lastName,
+      this.taxpayerId,
+      this.taxpayerIdFormatted,
+      this.identityDocument,
+      this.birthday,
+      required this.isBlocked,
+      required this.isStaff,
+      required this.isActive,
+      required this.dateJoined,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.emails,
+      required this.phones,
+      required this.addresses});
 }

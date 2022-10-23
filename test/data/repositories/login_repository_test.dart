@@ -4,11 +4,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class LoginDataSourceMock extends Mock implements LoginDataSource {}
+class RemoteDataSourceMock extends Mock implements RemoteDataSource {}
 
 void main() {
-  final loginDataSource = LoginDataSourceMock();
-  final loginRepositoryImp = LoginRepositoryImp(dataSource: loginDataSource);
+  final RemoteDataSource = RemoteDataSourceMock();
+  final loginRepositoryImp = LoginRepositoryImp(dataSource: RemoteDataSource);
   final loginEntity = LoginEntity(user: 'user', password: 'password');
   final userModel = getUserModelFake();
 
@@ -17,20 +17,20 @@ void main() {
   });
 
   group('Login repository |', () {
-    test('LoginDataSource.login method must be called 1 time', () async {
+    test('RemoteDataSource.login method must be called 1 time', () async {
       // arrange
-      when(() => loginDataSource.login(any())).thenAnswer((_) async => userModel);
+      when(() => RemoteDataSource.login(any())).thenAnswer((_) async => userModel);
 
       // act
       await loginRepositoryImp.login(loginEntity);
 
       // assert
-      verify(() => loginDataSource.login(any())).called(1);
+      verify(() => RemoteDataSource.login(any())).called(1);
     });
 
     test('Success: login method must return a UserEntity', () async {
       // arrange
-      when(() => loginDataSource.login(any())).thenAnswer((_) async => userModel);
+      when(() => RemoteDataSource.login(any())).thenAnswer((_) async => userModel);
 
       // act
       final response = await loginRepositoryImp.login(loginEntity);
@@ -41,10 +41,10 @@ void main() {
     });
 
     test(
-        'Exception: when loginDataSource.login method throws an ExceptionApp, should return that ExceptionApp',
+        'Exception: when RemoteDataSource.login method throws an ExceptionApp, should return that ExceptionApp',
         () async {
       // arrange
-      when(() => loginDataSource.login(any())).thenThrow(CredentialsException());
+      when(() => RemoteDataSource.login(any())).thenThrow(CredentialsException());
 
       // act
       final response = await loginRepositoryImp.login(loginEntity);
