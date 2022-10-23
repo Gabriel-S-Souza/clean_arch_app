@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clean_arch">
+	<uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="clean_arch"
+        android:label="Login Clean Arch"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
