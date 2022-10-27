@@ -69,7 +69,7 @@ class UserModel {
             .toList(),
       );
 
-  factory UserModel.fromEntity(entity) => UserModel(
+  factory UserModel.fromEntity(UserEntity entity) => UserModel(
         id: entity.id,
         avatarUrl: entity.avatarUrl,
         name: entity.name,
@@ -81,9 +81,9 @@ class UserModel {
         dateJoined: entity.dateJoined,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
-        emails: entity.emails,
-        phones: entity.phones,
-        addresses: entity.addresses,
+        emails: MapperApp.emailModelFromEntity(entity.emails),
+        phones: MapperApp.phoneModelFromEntity(entity.phones),
+        addresses: MapperApp.addressModelFromEntity(entity.addresses),
       );
 
   UserEntity toEntity() => UserEntity(

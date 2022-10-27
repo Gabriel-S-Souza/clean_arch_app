@@ -5,11 +5,10 @@ class HomeController {
   HomeController({required HandleSessionUserCase handleSessionUserCase})
       : _handleSessionUserCase = handleSessionUserCase;
 
-  late UserEntity sessionUser;
+  UserEntity? sessionUser;
 
   void getSessionUser() {
     final user = _handleSessionUserCase.getSessionUser();
-    if (user == null) return;
-    sessionUser == user;
+    sessionUser = user;
   }
 }

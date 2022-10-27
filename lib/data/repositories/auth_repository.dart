@@ -33,8 +33,9 @@ class AuthRepositoryImp implements AuthRepository {
   @override
   Future<Either<ExceptionApp, UserEntity>> getUser() async {
     final authModel = _localDataSource.getAuthData();
+    if (authModel?.access == null) throw NotFoundException();
     log('acceess ${authModel?.access}');
-    log('refresh ${authModel?.access}');
+    log('refresh ${authModel?.refresh}');
     try {
       final response = await _remoteDataSource.getUser(authModel!.access);
       return right(response.toEntity());

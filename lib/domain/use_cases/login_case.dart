@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 
 import '../domain.dart';
@@ -24,9 +22,9 @@ class LoginCaseImp implements LoginCase {
     final response = await _repository.login(loginEntity);
     return response.fold(
       (l) => left(l),
-      (r) async {
-        await _saveAuthDataCase.saveAuthData(AuthEntity.fromMap(r.body!));
-        return right(_repository.userEntityFromMap(r.body!['user']));
+      (response) async {
+        await _saveAuthDataCase.saveAuthData(AuthEntity.fromMap(response.body!));
+        return right(_repository.userEntityFromMap(response.body!['user']));
       },
     );
   }
@@ -37,17 +35,14 @@ class LoginCaseImp implements LoginCase {
         (l) async {
           if (l.statusCode == 403) {
             await _repository.updateAccessToken();
-            return (await _repository.getUser()).fold(
-              (l) => left(l),
-              (r) {
-                log('token renovado!!!!!!!!');
-                return right(r);
-              },
-            );
+            return _repository.getUser();
           } else {
             return left(l);
           }
         },
-        (r) => right(r),
+        (user) {
+          _repository.putSessionUser(user);
+          return right(user);
+        },
       );
 }
