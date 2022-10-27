@@ -4,18 +4,20 @@ import 'package:dartz/dartz.dart';
 
 import '../domain.dart';
 
-abstract class LoginUseCase {
+abstract class LoginCase {
   Future<Either<ExceptionApp, UserEntity>> login(LoginEntity loginEntity);
   Future<Either<ExceptionApp, UserEntity>> getUser();
-  Future<void> saveAuthData(AuthEntity authEntity);
-  UserEntity? getSessionUser();
-  void putSessionUser(UserEntity user);
 }
 
-class LoginUseCaseImp implements LoginUseCase {
-  final LoginRepository _repository;
+class LoginCaseImp implements LoginCase {
+  final AuthRepository _repository;
+  final SaveAuthDataCase _saveAuthDataCase;
 
-  LoginUseCaseImp({required LoginRepository repository}) : _repository = repository;
+  LoginCaseImp({
+    required AuthRepository repository,
+    required SaveAuthDataCase saveAuthDataCase,
+  })  : _repository = repository,
+        _saveAuthDataCase = saveAuthDataCase;
 
   @override
   Future<Either<ExceptionApp, UserEntity>> login(LoginEntity loginEntity) async {
@@ -23,7 +25,7 @@ class LoginUseCaseImp implements LoginUseCase {
     return response.fold(
       (l) => left(l),
       (r) async {
-        await saveAuthData(AuthEntity.fromMap(r.body!));
+        await _saveAuthDataCase.saveAuthData(AuthEntity.fromMap(r.body!));
         return right(_repository.userEntityFromMap(r.body!['user']));
       },
     );
@@ -48,15 +50,4 @@ class LoginUseCaseImp implements LoginUseCase {
         },
         (r) => right(r),
       );
-
-  @override
-  Future<void> saveAuthData(AuthEntity authEntity) async {
-    await _repository.saveAuthData(authEntity);
-  }
-
-  @override
-  UserEntity? getSessionUser() => _repository.getSessionUser();
-
-  @override
-  void putSessionUser(UserEntity user) => _repository.putSessionUser(user);
 }

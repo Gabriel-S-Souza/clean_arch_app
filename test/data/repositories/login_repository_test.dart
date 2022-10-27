@@ -8,7 +8,7 @@ class RemoteDataSourceMock extends Mock implements RemoteDataSource {}
 
 void main() {
   final RemoteDataSource = RemoteDataSourceMock();
-  final loginRepositoryImp = LoginRepositoryImp(dataSource: RemoteDataSource);
+  final AuthRepositoryImp = AuthRepositoryImp(dataSource: RemoteDataSource);
   final loginEntity = LoginEntity(user: 'user', password: 'password');
   final userModel = getUserModelFake();
 
@@ -22,7 +22,7 @@ void main() {
       when(() => RemoteDataSource.login(any())).thenAnswer((_) async => userModel);
 
       // act
-      await loginRepositoryImp.login(loginEntity);
+      await AuthRepositoryImp.login(loginEntity);
 
       // assert
       verify(() => RemoteDataSource.login(any())).called(1);
@@ -33,7 +33,7 @@ void main() {
       when(() => RemoteDataSource.login(any())).thenAnswer((_) async => userModel);
 
       // act
-      final response = await loginRepositoryImp.login(loginEntity);
+      final response = await AuthRepositoryImp.login(loginEntity);
 
       // assert
       expect(response.isRight(), equals(true));
@@ -47,7 +47,7 @@ void main() {
       when(() => RemoteDataSource.login(any())).thenThrow(CredentialsException());
 
       // act
-      final response = await loginRepositoryImp.login(loginEntity);
+      final response = await AuthRepositoryImp.login(loginEntity);
 
       // assert
       expect(response.isLeft(), equals(true));

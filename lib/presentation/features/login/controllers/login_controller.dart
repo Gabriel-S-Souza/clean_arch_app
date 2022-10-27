@@ -9,9 +9,8 @@ part 'login_controller.g.dart';
 class LoginController = LoginControllerBase with _$LoginController;
 
 abstract class LoginControllerBase with Store {
-  final LoginUseCase _loginUseCase;
-  LoginControllerBase({required LoginUseCase loginUseCase})
-      : _loginUseCase = loginUseCase;
+  final LoginCase _loginCase;
+  LoginControllerBase({required LoginCase loginCase}) : _loginCase = loginCase;
 
   final appController = GlobalKey<FormState>();
 
@@ -49,7 +48,7 @@ abstract class LoginControllerBase with Store {
       isLoading = true;
 
       final loginEntity = LoginEntity(user: user, password: password);
-      final response = await _loginUseCase.login(loginEntity);
+      final response = await _loginCase.login(loginEntity);
 
       response.fold(
         (exception) {
