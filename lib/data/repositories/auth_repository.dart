@@ -6,12 +6,12 @@ import '../../domain/domain.dart';
 import '../data_source/data_source.dart';
 import '../models/models.dart';
 
-class LoginRepositoryImp implements LoginRepository {
+class AuthRepositoryImp implements AuthRepository {
   final RemoteDataSource _remoteDataSource;
   final LocalDataSource _localDataSource;
   final MemoryDataSource _memoryDataSource;
 
-  LoginRepositoryImp({
+  AuthRepositoryImp({
     required RemoteDataSource remoteDataSource,
     required LocalDataSource localDataSource,
     required MemoryDataSource memoryDataSource,
